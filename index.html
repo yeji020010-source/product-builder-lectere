@@ -1,14 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotto Winning Checker</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <div class="container">
+        <h1>Lotto Winning Checker</h1>
+        <div class="user-inputs">
+            <input type="number" class="user-number" min="1" max="45">
+            <input type="number" class="user-number" min="1" max="45">
+            <input type="number" class="user-number" min="1" max="45">
+            <input type="number" class="user-number" min="1" max="45">
+            <input type="number" class="user-number" min="1" max="45">
+            <input type="number" class="user-number" min="1" max="45">
+        </div>
+        <button id="check-btn">Check Winning Numbers</button>
+        <div class="results">
+            <h2>Winning Numbers</h2>
+            <div class="winning-numbers-display"></div>
+            <h2>Your Results</h2>
+            <p id="result-message"></p>
+        </div>
+    </div>
+    <script src="main.js"></script>
 </body>
 </html>
