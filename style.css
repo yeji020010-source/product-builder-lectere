@@ -2,12 +2,11 @@
     --bg-color: #f0f0f0;
     --container-bg: #ffffff;
     --text-color: #333333;
-    --input-border: #cccccc;
-    --input-bg: #ffffff;
-    --input-text: #000000;
     --button-bg: #008CBA;
     --button-hover: #007B9A;
     --shadow-color: rgba(0, 0, 0, 0.1);
+    --ball-bg: #f44336;
+    --ball-selected: #4CAF50;
     --bg-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M20 3.333L10 10v20l10 6.667L30 30V10L20 3.333zM10 10h20v20H10V10z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
@@ -15,9 +14,6 @@
     --bg-color: #1a1a1a;
     --container-bg: #2d2d2d;
     --text-color: #e0e0e0;
-    --input-border: #444444;
-    --input-bg: #3d3d3d;
-    --input-text: #ffffff;
     --button-bg: #005f7a;
     --button-hover: #004a5f;
     --shadow-color: rgba(0, 0, 0, 0.5);
@@ -25,7 +21,7 @@
 }
 
 body {
-    font-family: sans-serif;
+    font-family: 'Pretendard', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,17 +35,23 @@ body {
 
 .container {
     background-color: var(--container-bg);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px var(--shadow-color), 0 6px 6px var(--shadow-color);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px var(--shadow-color);
     text-align: center;
     transition: background-color 0.3s, box-shadow 0.3s;
-    max-width: 90%;
+    width: 600px;
+    max-width: 95%;
 }
 
-h1, h2 {
-    color: var(--text-color);
-    margin-bottom: 1.5rem;
+h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.description {
+    opacity: 0.8;
+    margin-bottom: 2rem;
 }
 
 .theme-toggle {
@@ -74,76 +76,73 @@ h1, h2 {
     color: var(--container-bg);
 }
 
-.user-inputs {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-}
-
-.user-number {
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    border: 2px solid var(--input-border);
-    background-color: var(--input-bg);
-    color: var(--input-text);
-    border-radius: 10px;
-    font-size: 1.5rem;
-    transition: all 0.3s;
-}
-
-.user-number.match {
-    background-color: #4CAF50;
-    color: white;
-    border-color: #4CAF50;
-}
-
-#check-btn {
+#recommend-btn {
     background-color: var(--button-bg);
     color: white;
     border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 12px;
     cursor: pointer;
-    border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 140, 186, 0.4);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease;
+    margin-bottom: 2rem;
 }
 
-#check-btn:hover {
+#recommend-btn:hover {
     background-color: var(--button-hover);
-    box-shadow: 0 8px 25px rgba(0, 140, 186, 0.6);
     transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 140, 186, 0.6);
 }
 
-.results {
-    margin-top: 2rem;
+.recommendation-results {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.winning-numbers-display {
+.recommendation-set {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
+    gap: 12px;
+    padding: 1rem;
+    background: rgba(0,0,0,0.03);
+    border-radius: 15px;
+    transition: transform 0.2s;
 }
 
-.winning-number {
-    width: 50px;
-    height: 50px;
+.dark-mode .recommendation-set {
+    background: rgba(255,255,255,0.05);
+}
+
+.recommendation-set:hover {
+    transform: scale(1.02);
+}
+
+.lotto-ball {
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
-    background-color: #f44336;
+    background-color: var(--ball-bg);
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: bold;
+    cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    user-select: none;
+}
+
+.lotto-ball:hover {
+    transform: translateY(-5px);
+}
+
+.lotto-ball.selected {
+    background-color: var(--ball-selected);
+    box-shadow: 0 0 15px var(--ball-selected);
+    transform: scale(1.1);
 }
