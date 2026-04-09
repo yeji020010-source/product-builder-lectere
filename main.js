@@ -3,11 +3,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const recommendBtn = document.getElementById('recommend-btn');
     const resultsContainer = document.getElementById('recommendation-results');
 
-    // 테마 전환 로직
-    const currentTheme = localStorage.getItem('theme');
-    if (currentTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        themeBtn.textContent = '라이트 모드로 전환';
+    if (!themeBtn || !recommendBtn || !resultsContainer) {
+        console.error('필수 요소를 찾을 수 없습니다.');
+        return;
+    }
+
+    // 테마 전환 로직 (localStorage 안전하게 처리)
+    try {
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeBtn.textContent = '라이트 모드로 전환';
+        }
+    } catch (e) {
+        console.warn('localStorage에 접근할 수 없습니다:', e);
     }
 
     themeBtn.addEventListener('click', () => {
@@ -19,7 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             themeBtn.textContent = '다크 모드로 전환';
         }
-        localStorage.setItem('theme', theme);
+        
+        try {
+            localStorage.setItem('theme', theme);
+        } catch (e) {
+            console.warn('테마 설정을 저장할 수 없습니다:', e);
+        }
     });
 
     // 로또 번호 생성 함수 (1세트)
